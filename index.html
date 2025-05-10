@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mapa Visual Corrigido</title>
+  <title>Mapa Visual com Animação</title>
   <style>
     html, body {
       margin: 0;
@@ -69,6 +69,21 @@
       height: 100%;
       z-index: 0;
     }
+
+    .animated-path {
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawLine 1.5s ease forwards;
+    }
+
+    @keyframes drawLine {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -104,7 +119,7 @@
     const x1 = centerRect.right - mapaRect.left;
     const y1 = centerRect.top + centerRect.height / 2 - mapaRect.top;
 
-    branches.forEach(branch => {
+    branches.forEach((branch, index) => {
       const branchRect = branch.getBoundingClientRect();
       const x2 = branchRect.left - mapaRect.left;
       const y2 = branchRect.top + branchRect.height / 2 - mapaRect.top;
@@ -112,9 +127,8 @@
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       const curve = `M${x1},${y1} C${x1 + 60},${y1} ${x2 - 60},${y2} ${x2},${y2}`;
       path.setAttribute("d", curve);
-      path.setAttribute("stroke", "white");
-      path.setAttribute("fill", "none");
-      path.setAttribute("stroke-width", "2");
+      path.setAttribute("class", "animated-path");
+      path.setAttribute("style", `animation-delay: ${index * 0.2}s`);
       svg.appendChild(path);
     });
   }
