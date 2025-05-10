@@ -127,16 +127,16 @@
 
 <div class="wrapper">
   <div class="mapa" id="mapa">
-    <div class="center" id="center-block" data-text="Da análise ao faturamento.<br>Um método que guia o seu crescimento">
+    <div class="center" id="center-block">
       Da análise ao faturamento.<br>Um método que guia o seu crescimento
     </div>
 
     <div class="right" id="right-blocks">
-      <div class="branch" data-text="Diagnóstico Personalizado"></div>
-      <div class="branch" data-text="Anúncios Qualificados"></div>
-      <div class="branch" data-text="Visual que Vende"></div>
-      <div class="branch" data-text="Treinamento Comercial"></div>
-      <div class="branch" data-text="Crescimento Baseado em Dados"></div>
+      <div class="branch">Diagnóstico Personalizado</div>
+      <div class="branch">Anúncios Qualificados</div>
+      <div class="branch">Visual que Vende</div>
+      <div class="branch">Treinamento Comercial</div>
+      <div class="branch">Crescimento Baseado em Dados</div>
     </div>
 
     <svg id="svg-lines"></svg>
@@ -165,7 +165,7 @@
       const curve = `M${x1},${y1} C${x1 + 60},${y1} ${x2 - 60},${y2} ${x2},${y2}`;
       path.setAttribute("d", curve);
       path.setAttribute("class", "animated-path");
-      path.setAttribute("style", `animation-delay: ${index * 0.2}s`);
+      path.setAttribute("style", `stroke-dasharray: 10 6; stroke-dashoffset: 0; animation: moveDash 2s linear infinite; animation-delay: ${index * 1.2}s`);
       svg.appendChild(path);
     });
   }
@@ -176,31 +176,5 @@
   });
 </script>
 
-
-<script>
-function typeText(element, delay = 40, startDelay = 0) {
-  const text = element.getAttribute("data-text");
-  element.innerHTML = "";
-  let i = 0;
-  setTimeout(() => {
-    const interval = setInterval(() => {
-      element.innerHTML += text.charAt(i);
-      i++;
-      if (i >= text.length) clearInterval(interval);
-    }, delay);
-  }, startDelay);
-}
-
-window.addEventListener('load', () => {
-  const center = document.getElementById("center-block");
-  typeText(center, 30, 300); // começa após 300ms
-
-  const branches = document.querySelectorAll("#right-blocks .branch");
-  branches.forEach((el, index) => {
-    typeText(el, 25, 1400 + index * 600);
-  });
-});
-</script>
 </body>
 </html>
-
