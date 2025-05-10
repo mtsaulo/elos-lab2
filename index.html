@@ -33,7 +33,6 @@
     }
 
     .center {
-      z-index: 2;
       backdrop-filter: blur(8px);
       background: rgba(255, 255, 255, 0.05);
       border-radius: 16px;
@@ -96,7 +95,6 @@
     }
 
     svg {
-      z-index: 1;
       position: absolute;
       top: 0;
       left: 0;
@@ -121,16 +119,7 @@
         stroke-dashoffset: -16;
       }
     }
-  
-@keyframes drawLine {
-  0% {
-    stroke-dashoffset: 1000;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-</style>
+  </style>
 </head>
 <body>
 
@@ -174,7 +163,7 @@
       const curve = `M${x1},${y1} C${x1 + 60},${y1} ${x2 - 60},${y2} ${x2},${y2}`;
       path.setAttribute("d", curve);
       path.setAttribute("class", "animated-path");
-      path.setAttribute("style", `stroke-dasharray: 10 6; stroke-dashoffset: 1000; animation: drawLine 1s linear forwards; animation-delay: ${index * 1.1}s`);
+      path.setAttribute("style", `animation-delay: ${index * 0.2}s`);
       svg.appendChild(path);
     });
   }
