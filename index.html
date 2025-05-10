@@ -10,8 +10,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      background: radial-gradient(circle at 30% 30%, #00bbe022, transparent),
-                  radial-gradient(circle at 70% 70%, #1B222322, transparent);
+      background: transparent;
       font-family: 'Lato', sans-serif;
       overflow: hidden;
     }
@@ -35,7 +34,7 @@
     .center {
       z-index: 2;
       backdrop-filter: blur(8px);
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(23, 103, 80, 0.2);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 0 30px rgba(0, 187, 224, 0.25), 0 0 20px rgba(0, 187, 224, 0.15);
@@ -66,7 +65,7 @@
 
     .branch {
       backdrop-filter: blur(8px);
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(23, 103, 80, 0.2);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 0 20px rgba(0, 187, 224, 0.15);
@@ -103,31 +102,24 @@
       pointer-events: none;
       width: 100%;
       height: 100%;
-      z-index: 0;
     }
 
     .animated-path {
       stroke: white;
       fill: none;
       stroke-width: 2;
-      stroke-dasharray: 10 6;
-      stroke-dashoffset: 0;
-      animation: moveDash 1.5s linear infinite;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawLine 1.5s ease forwards;
       filter: drop-shadow(0 0 4px rgba(0, 187, 224, 0.2));
     }
 
-    @keyframes moveDash {
+    @keyframes drawLine {
       to {
-        stroke-dashoffset: -16;
+        stroke-dashoffset: 0;
       }
     }
-  
-@keyframes drawLine {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-</style>
+  </style>
 </head>
 <body>
 
