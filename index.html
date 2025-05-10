@@ -4,14 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mapa Visual Animado Total</title>
+  <title>Mapa Visual Refinado</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: transparent;
+      background: radial-gradient(circle at 30% 30%, #00bbe022, transparent),
+                  radial-gradient(circle at 70% 70%, #1B222322, transparent);
       font-family: 'Lato', sans-serif;
+      overflow: hidden;
     }
 
     .wrapper {
@@ -27,6 +29,7 @@
       align-items: center;
       gap: 80px;
       position: relative;
+      z-index: 1;
     }
 
     .center {
@@ -34,12 +37,18 @@
       background: rgba(255, 255, 255, 0.05);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 20px rgba(0, 187, 224, 0.15);
+      box-shadow: 0 0 30px rgba(0, 187, 224, 0.25), 0 0 20px rgba(0, 187, 224, 0.15);
       padding: 20px;
       color: white;
       font-weight: bold;
       text-align: center;
       width: 240px;
+      animation: pulseCenter 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseCenter {
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 187, 224, 0.15); }
+      50% { box-shadow: 0 0 40px rgba(0, 187, 224, 0.35); }
     }
 
     .right {
@@ -60,6 +69,12 @@
       width: 300px;
       opacity: 0;
       animation: floatUpRight 0.8s ease-out forwards;
+      transition: all 0.3s ease;
+    }
+
+    .branch:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px rgba(0, 187, 224, 0.3);
     }
 
     .branch:nth-child(1) { animation-delay: 0.3s; }
@@ -87,14 +102,15 @@
       stroke: white;
       fill: none;
       stroke-width: 2;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: drawLine 1.5s ease forwards;
+      stroke-dasharray: 10 6;
+      stroke-dashoffset: 0;
+      animation: moveDash 1.5s linear infinite;
+      filter: drop-shadow(0 0 4px rgba(0, 187, 224, 0.2));
     }
 
-    @keyframes drawLine {
+    @keyframes moveDash {
       to {
-        stroke-dashoffset: 0;
+        stroke-dashoffset: -16;
       }
     }
   </style>
