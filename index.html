@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mapa Visual Dinâmico</title>
+  <title>Mapa Visual Corrigido</title>
   <style>
     html, body {
       margin: 0;
@@ -74,7 +74,7 @@
 <body>
 
 <div class="wrapper">
-  <div class="mapa">
+  <div class="mapa" id="mapa">
     <div class="center" id="center-block">
       Da análise ao faturamento.<br>Um método que guia o seu crescimento
     </div>
@@ -93,19 +93,21 @@
 
 <script>
   function drawLines() {
+    const mapa = document.getElementById('mapa');
     const center = document.getElementById('center-block');
     const branches = document.querySelectorAll('#right-blocks .branch');
     const svg = document.getElementById('svg-lines');
     svg.innerHTML = '';
 
-    const rectCenter = center.getBoundingClientRect();
-    const x1 = rectCenter.right;
-    const y1 = rectCenter.top + rectCenter.height / 2;
+    const mapaRect = mapa.getBoundingClientRect();
+    const centerRect = center.getBoundingClientRect();
+    const x1 = centerRect.right - mapaRect.left;
+    const y1 = centerRect.top + centerRect.height / 2 - mapaRect.top;
 
     branches.forEach(branch => {
-      const rectBranch = branch.getBoundingClientRect();
-      const x2 = rectBranch.left;
-      const y2 = rectBranch.top + rectBranch.height / 2;
+      const branchRect = branch.getBoundingClientRect();
+      const x2 = branchRect.left - mapaRect.left;
+      const y2 = branchRect.top + branchRect.height / 2 - mapaRect.top;
 
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       const curve = `M${x1},${y1} C${x1 + 60},${y1} ${x2 - 60},${y2} ${x2},${y2}`;
@@ -119,7 +121,7 @@
 
   window.addEventListener('load', drawLines);
   window.addEventListener('resize', () => {
-    setTimeout(drawLines, 100); // debounce para evitar bugs em resize rápido
+    setTimeout(drawLines, 100);
   });
 </script>
 
