@@ -122,12 +122,11 @@
       }
     }
   
-    @keyframes drawLine {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
-    
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 </style>
 </head>
 <body>
@@ -172,7 +171,7 @@
       const curve = `M${x1},${y1} C${x1 + 60},${y1} ${x2 - 60},${y2} ${x2},${y2}`;
       path.setAttribute("d", curve);
       path.setAttribute("class", "animated-path");
-      path.setAttribute("style", `stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawLine 1.5s ease forwards; animation-delay: ${index * 1.6}s`);
+      path.setAttribute("style", `stroke-dasharray: 10 6; stroke-dashoffset: 1000; animation: drawLine 0.5s ease forwards; animation-delay: ${index * 0.8}s`);
       svg.appendChild(path);
     });
   }
